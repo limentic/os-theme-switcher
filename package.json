@@ -1,0 +1,61 @@
+{
+  "name": "os-theme-switcher",
+  "displayName": "os-theme-switcher",
+  "description": "Allows VSCode to detect your OS color theme (light / dark) to switch your VScode one accordingly.",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.73.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [],
+    "configuration": {
+      "title": "OSThemeSwitcher",
+      "properties": {
+        "os-theme-switcher.daemonFolderPath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to the folder where the daemon will be installed. It's mandatory to set this value, the extension won't work otherwise."
+        },
+        "os-theme-switcher.lightTheme": {
+          "type": "string",
+          "default": "",
+          "description": "Name of your preferred light theme."
+        },
+        "os-theme-switcher.darkTheme": {
+          "type": "string",
+          "default": "",
+          "description": "Name of your preferred dark theme."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts",
+    "package": "vsce package --baseImagesUrl https://raw.githubusercontent.com/limentic/os-theme-switcher/main/assets/",
+    "daemon:osx": "swiftc ./daemon/osx/main.swift -o ./out/os-theme-switcher"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.0.0",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.73.0",
+    "@typescript-eslint/eslint-plugin": "^5.42.0",
+    "@typescript-eslint/parser": "^5.42.0",
+    "eslint": "^8.26.0",
+    "glob": "^8.0.3",
+    "typescript": "^4.8.4",
+    "vsce": "^2.3.0"
+  },
+  "dependencies": {
+    "chokidar": "^3.5.3"
+  }
+}
